@@ -14,6 +14,10 @@ import {
 import { useAuth } from '../context/AuthContext';
 import PublicHeader from '../components/PublicHeader';
 import { useNavigate } from 'react-router-dom';
+import { Breadcrumb } from '../components/common/Breadcrumb';
+import { Sidebar } from '../components/layout/Sidebar';
+import { DrivePage } from './DrivePage';
+import { authApi } from '../api/auth.api';
 
 export default function Login() {
   const { login } = useAuth();
@@ -72,7 +76,7 @@ export default function Login() {
     e.preventDefault();
     setApiError('');
 
-    // Full form validation check
+    // 1. Full form validation check
     const emailErr = validateField('email', formData.email);
     const passErr = validateField('password', formData.password);
 
@@ -83,24 +87,34 @@ export default function Login() {
 
     setIsSubmitting(true);
 
-    const res = await login({
-      email: formData.email.trim(),
-      password: formData.password,
-    });
+    try {
+      // 2. Call your authentication API endpoint directly
+      const res = await authApi.login({
+        email: formData.email.trim(),
+        password: formData.password,
+      });
 
-    setIsSubmitting(false);
+      // Extract auth payload (adjust property names if your API returns different keys)
+      const { token, user } = res.data;
 
-    if (!res.success) {
-      setApiError(res.error);
-    } else {
-      // Direct user into app dashboard
-      window.location.href = '/dashboard';
+      // 3. Update AuthContext state & localStorage
+      login(token, user);
+
+      // 4. Redirect to dashboard
+      window.location.href = '/dashboard'; 
+      // Or if using react-router: navigate('/dashboard');
+    } catch (err) {
+      const message = err.response?.data?.message || err.message || 'Login failed. Please try again.';
+      setApiError(message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <>
     <PublicHeader />
+    
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans antialiased selection:bg-[#EFF6FF] selection:text-[#2563EB]">
       {/* Background subtle grid */}
       <div className="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />

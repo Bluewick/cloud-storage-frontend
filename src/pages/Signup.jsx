@@ -128,47 +128,61 @@ export default function Signup() {
     setErrors((prev) => ({ ...prev, [name]: err }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setApiError('');
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setApiError('');
 
-    const fnErr = validateField('fullName', formData.fullName);
-    const emErr = validateField('email', formData.email);
-    const pwErr = validateField('password', formData.password);
-    const cpErr = validateField('confirmPassword', formData.confirmPassword);
+  // 1. Full form validation check
+  const fnErr = validateField('fullName', formData.fullName);
+  const emErr = validateField('email', formData.email);
+  const pwErr = validateField('password', formData.password);
+  const cpErr = validateField('confirmPassword', formData.confirmPassword);
 
-    let termsErr = '';
-    if (!formData.agreeTerms) {
-      termsErr = 'You must agree to the Terms of Service';
-    }
+  let termsErr = '';
+  if (!formData.agreeTerms) {
+    termsErr = 'You must agree to the Terms of Service';
+  }
 
-    if (fnErr || emErr || pwErr || cpErr || termsErr) {
-      setErrors({
-        fullName: fnErr,
-        email: emErr,
-        password: pwErr,
-        confirmPassword: cpErr,
-        agreeTerms: termsErr,
-      });
-      return;
-    }
+  if (fnErr || emErr || pwErr || cpErr || termsErr) {
+    setErrors({
+      fullName: fnErr,
+      email: emErr,
+      password: pwErr,
+      confirmPassword: cpErr,
+      agreeTerms: termsErr,
+    });
+    return;
+  }
 
-    setIsSubmitting(true);
+  setIsSubmitting(true);
 
-    const res = await register({
+  try {
+    // 2. Call your registration API endpoint directly
+    const res = await authApi.register({
       fullName: formData.fullName.trim(),
       email: formData.email.trim(),
       password: formData.password,
     });
 
-    setIsSubmitting(false);
+    // Extract auth payload returned by the registration endpoint
+    const { token, user } = res.data;
 
-    if (!res.success) {
-      setApiError(res.error);
-    } else {
-      window.location.href = '/dashboard';
-    }
-  };
+    // 3. Log the user in immediately using AuthContext
+    login(token, user);
+
+    // 4. Redirect to dashboard
+    window.location.href = '/dashboard';
+    // Or if using react-router: navigate('/dashboard');
+  } catch (err) {
+    const message =
+      err.response?.data?.message ||
+      err.message ||
+      'Registration failed. Please try again.';
+    setApiError(message);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <>

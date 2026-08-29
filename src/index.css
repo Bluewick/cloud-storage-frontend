@@ -1,63 +1,8 @@
 @import "tailwindcss";
 
-@theme {
-  /* Font Family */
-  --font-sans: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+@config "../tailwind.config.js";
 
-  /* Surface Colors */
-  --color-surface: #f8fafc;
-  --color-surface-dim: #f1f5f9;
-  --color-surface-bright: #ffffff;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #f8fafc;
-  --color-surface-container: #f1f5f9;
-  --color-surface-container-high: #e2e8f0;
-  --color-surface-container-highest: #cbd5e1;
 
-  /* On-Surface Colors */
-  --color-on-surface: #0f172a;
-  --color-on-surface-variant: #475569;
-  --color-on-surface-muted: #94a3b8;
-
-  /* Outline Colors */
-  --color-outline: #e2e8f0;
-  --color-outline-variant: #cbd5e1;
-  --color-outline-focus: #2563eb;
-
-  /* Primary Colors */
-  --color-primary: #2563eb;
-  --color-primary-container: #eff6ff;
-  --color-primary-on-container: #1d4ed8;
-  --color-primary-hover: #1d4ed8;
-
-  /* Secondary Colors */
-  --color-secondary: #0f172a;
-  --color-secondary-container: #f1f5f9;
-  --color-secondary-on-container: #334155;
-
-  /* Accent Colors */
-  --color-accent-success: #10b981;
-  --color-accent-success-container: #ecfdf5;
-  --color-accent-on-success: #047857;
-  --color-accent-warning: #f59e0b;
-  --color-accent-warning-container: #fffbeb;
-  --color-accent-on-warning: #b45309;
-  --color-accent-error: #ef4444;
-  --color-accent-error-container: #fef2f2;
-  --color-accent-on-error: #b91c1c;
-
-  /* Tag Colors */
-  --color-tag-yellow: #f59e0b;
-  --color-tag-red: #ef4444;
-  --color-tag-blue: #3b82f6;
-  --color-tag-green: #10b981;
-  --color-tag-purple: #8b5cf6;
-
-  /* Custom Box Shadows */
-  --shadow-level-1: 0px 1px 3px rgba(15, 23, 42, 0.04), 0px 1px 2px rgba(15, 23, 42, 0.02);
-  --shadow-level-2: 0px 12px 24px -4px rgba(15, 23, 42, 0.08), 0px 4px 6px -2px rgba(15, 23, 42, 0.03);
-  --shadow-level-3: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
-}
 
 /* :root {
   --text: #6b6375;

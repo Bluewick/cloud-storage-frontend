@@ -36,7 +36,7 @@ import {
   ExternalLink,
   X
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PublicHeader from '../components/PublicHeader';
 
 export default function Landing() {
@@ -146,16 +146,18 @@ export default function Landing() {
 
             {/* CTA Group */}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-              <button className="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+              <Link to="/signup">
+              
+              <button className="w-full cursor-pointer sm:w-auto px-6 py-3.5 rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-sm shadow-md transition-all flex items-center justify-center gap-2">
                 <Cloud className="w-4 h-4" />
-                <span>Start Free (15 GB Included)</span>
+                <span>Start Free (5 GB Included)</span>
               </button>
-
+              </Link>
               <a
                 href="#demo"
                 className="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-white hover:bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0] font-medium text-sm shadow-level-1 transition-all flex items-center justify-center gap-2"
               >
-                <span>Live Interactive Sandbox</span>
+                <span>Learn More</span>
                 <SlidersHorizontal className="w-4 h-4 text-[#64748B]" />
               </a>
             </div>
@@ -664,65 +666,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* -------------------- Tech Architecture Breakdown -------------------- */}
-      <section id="security" className="py-20 bg-[#F8FAFC] border-t border-[#E2E8F0]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-xl border border-[#E2E8F0] p-8 shadow-level-1">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              
-              <div className="lg:col-span-5 space-y-4">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#2563EB] bg-[#EFF6FF] px-2.5 py-1 rounded">
-                  System Architecture
-                </span>
-                <h3 className="text-2xl font-bold text-[#0F172A]">
-                  Enterprise stack built on Postgres & Node.js
-                </h3>
-                <p className="text-xs text-[#475569] leading-relaxed">
-                  Engineered with a reliable decoupled architecture: RESTful Express micro-services, indexed PostgreSQL tree pointers for sub-millisecond folder traversal.
-                </p>
 
-                <div className="space-y-2 pt-2 text-xs">
-                  <div className="flex items-center gap-2 text-[#0F172A]">
-                    <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
-                    <span>PostgreSQL database with indexed closure trees</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-[#0F172A]">
-                    <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
-                    <span>Object Storage with CDN edge caching</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-[#0F172A]">
-                    <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
-                    <span>Background worker queues for video & image thumbnailing</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:col-span-7 bg-[#F8FAFC] rounded-lg border border-[#E2E8F0] p-5 font-mono text-xs text-[#475569]">
-                <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#CBD5E1] text-[11px]">
-                  <span className="font-semibold text-[#0F172A]">API Response Schema: GET /api/v1/files/tree</span>
-                  <span className="text-[#10B981] font-bold">200 OK • 18ms</span>
-                </div>
-                <pre className="text-[11px] leading-relaxed overflow-x-auto text-[#0F172A]">
-{`{
-  "status": "success",
-  "folder_id": "fld_921841",
-  "breadcrumbs": ["Root", "Marketing", "Campaign Assets 2026"],
-  "permissions": {
-    "role": "Owner",
-    "can_write": true,
-    "can_share": true
-  },
-  "storage_engine": "supabase_s3_standard",
-  "items_count": 4,
-  "retention_policy_days": 30
-}`}
-                </pre>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* -------------------- Interactive Storage & Pricing Calculator -------------------- */}
       <section id="pricing" className="py-20 bg-white border-t border-[#E2E8F0]">

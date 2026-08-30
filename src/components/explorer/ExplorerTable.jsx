@@ -38,7 +38,7 @@ export function ExplorerTable({
   };
 
   return (
-    <div className="w-full bg-white rounded-xl border border-outline shadow-level-1 overflow-hidden">
+    <div className="w-full bg-white rounded-xl border border-outline shadow-level-1">
       <table className="w-full text-left border-collapse">
         <thead>
           <tr className="h-9 border-b border-outline bg-surface-dim/50 text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant">

@@ -25,20 +25,31 @@ export function DropdownMenu({
 
   return (
     <div className="relative inline-block text-left" ref={containerRef}>
-      <div onClick={() => setIsOpen((prev) => !prev)} className="cursor-pointer">
+      {/* Trigger */}
+      <div 
+        onClick={() => setIsOpen((prev) => !prev)} 
+        className="cursor-pointer"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+      >
         {trigger}
       </div>
 
-      {isOpen && (
-        <div
-          onClick={() => setIsOpen(false)}
-          className={`absolute z-40 mt-1.5 w-52 bg-white rounded-xl border border-outline shadow-level-2 p-1.5 animate-in fade-in zoom-in-95 duration-100 ${
-            align === 'right' ? 'right-0' : 'left-0'
-          } ${className}`}
-        >
-          {children}
-        </div>
-      )}
+      {/* Dropdown Menu (Always in DOM, toggled via CSS) */}
+      <div
+        onClick={() => setIsOpen(false)}
+        className={`absolute z-40 mt-1.5 w-52 bg-white rounded-xl border border-outline shadow-level-2 p-1.5 
+          transition-all duration-150 ease-out
+          ${align === 'right' ? 'right-0 origin-top-right' : 'left-0 origin-top-left'}
+          ${
+            isOpen
+              ? 'opacity-100 scale-100 translate-y-0 visible pointer-events-auto'
+              : 'opacity-0 scale-95 -translate-y-1.5 invisible pointer-events-none'
+          }
+          ${className}`}
+      >
+        {children}
+      </div>
     </div>
   );
 }
@@ -47,7 +58,7 @@ export function DropdownItem({
   children,
   icon,
   onClick,
-  variant = 'default', // 'default' | 'destructive'
+  variant = 'default',
   disabled = false,
   shortcut,
   className = '',

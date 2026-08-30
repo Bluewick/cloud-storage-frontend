@@ -159,7 +159,7 @@ export function PublicViewPage() {
           </div>
           <div>
             <span className="text-sm font-bold tracking-tight text-slate-900 block leading-tight">
-              Lumina Vault
+              Stream Drive
             </span>
             <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wider block">
               Public Portal
@@ -607,7 +607,7 @@ export function PublicViewPage() {
       {/* Footer Strip */}
       <footer className="w-full py-4 text-center text-xs text-slate-400 flex items-center justify-center gap-1.5">
         <ShieldCheck size={14} className="text-emerald-500" />
-        <span>Powered by Lumina Vault Cloud Storage</span>
+        <span>Powered by Stream Drive</span>
       </footer>
     </div>
   );

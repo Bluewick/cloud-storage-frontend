@@ -112,7 +112,7 @@ export default function Landing() {
       {/* -------------------- Top Notification Banner -------------------- */}
       <div className="bg-[#EFF6FF] border-b border-[#E2E8F0] px-4 py-2 text-center text-xs font-medium text-[#1D4ED8] flex items-center justify-center gap-2">
         <span className="flex h-2 w-2 rounded-full bg-[#2563EB] animate-pulse"></span>
-        <span>Lumina Vault 2.0 is live: Supabase S3 Object Storage + Instant Zero-Knowledge Share links</span>
+        <span>Stream Drive 2.0 is live: Instant Zero-Knowledge Share links</span>
         <a href="#features" className="underline font-semibold hover:text-[#1E40AF] inline-flex items-center gap-0.5">
           Read architecture note <ArrowUpRight className="w-3 h-3" />
         </a>
@@ -141,7 +141,7 @@ export default function Landing() {
             </h1>
 
             <p className="mt-6 text-base sm:text-lg text-[#475569] leading-relaxed max-w-2xl mx-auto">
-              Effortless folder hierarchies, lightning multi-part uploads, granular viewer/editor permissions, and password-protected expiry links. Powered by Supabase & Postgres.
+              Effortless folder hierarchies, lightning multi-part uploads, granular viewer/editor permissions, and password-protected expiry links.
             </p>
 
             {/* CTA Group */}
@@ -678,7 +678,7 @@ export default function Landing() {
                   Enterprise stack built on Postgres & Node.js
                 </h3>
                 <p className="text-xs text-[#475569] leading-relaxed">
-                  Engineered with a reliable decoupled architecture: RESTful Express micro-services, indexed PostgreSQL tree pointers for sub-millisecond folder traversals, and Supabase S3 bucket distribution.
+                  Engineered with a reliable decoupled architecture: RESTful Express micro-services, indexed PostgreSQL tree pointers for sub-millisecond folder traversal.
                 </p>
 
                 <div className="space-y-2 pt-2 text-xs">
@@ -688,7 +688,7 @@ export default function Landing() {
                   </div>
                   <div className="flex items-center gap-2 text-[#0F172A]">
                     <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
-                    <span>Supabase Object Storage with CDN edge caching</span>
+                    <span>Object Storage with CDN edge caching</span>
                   </div>
                   <div className="flex items-center gap-2 text-[#0F172A]">
                     <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
@@ -825,14 +825,14 @@ export default function Landing() {
               <div className="w-6 h-6 rounded bg-[#2563EB] flex items-center justify-center text-white">
                 <Cloud className="w-3.5 h-3.5" />
               </div>
-              <span className="font-bold text-sm text-[#0F172A]">Lumina Vault</span>
+              <span className="font-bold text-sm text-[#0F172A]">Stream Drive</span>
             </div>
             <p className="max-w-xs text-[11px] leading-relaxed">
               Precision minimal cloud storage service. High data density, S3 reliability, and frictionless team collaboration.
             </p>
             <div className="flex items-center gap-2 pt-2">
               <span className="flex h-2 w-2 rounded-full bg-[#10B981]"></span>
-              <span className="text-[11px] font-medium text-[#047857]">All systems operational (Supabase S3)</span>
+              <span className="text-[11px] font-medium text-[#047857]">All systems operational</span>
             </div>
           </div>
 
@@ -859,17 +859,17 @@ export default function Landing() {
           <div>
             <p className="font-bold text-[#0F172A] uppercase tracking-wider text-[11px] mb-3">Developers</p>
             <ul className="space-y-2">
-              <li><a href="#" className="hover:text-[#0F172A]">Express REST API</a></li>
-              <li><a href="#" className="hover:text-[#0F172A]">Supabase Storage</a></li>
+              <li><a href="#" className="hover:text-[#0F172A]">REST API</a></li>
+              <li><a href="#" className="hover:text-[#0F172A]">Storage</a></li>
               <li><a href="#" className="hover:text-[#0F172A]">Webhook Events</a></li>
-              <li><a href="#" className="hover:text-[#0F172A]">CLI Upload Tool</a></li>
+              <li><a href="#" className="hover:text-[#0F172A]">Upload Tool</a></li>
             </ul>
           </div>
 
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-[#F1F5F9] flex flex-col sm:flex-row items-center justify-between text-[11px] gap-2">
-          <p>© {new Date().getFullYear()} Lumina Clarity Design System. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Stream Drive. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <a href="#" className="hover:text-[#0F172A]">Privacy Policy</a>
             <a href="#" className="hover:text-[#0F172A]">Terms of Service</a>

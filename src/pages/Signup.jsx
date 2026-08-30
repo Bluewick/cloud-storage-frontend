@@ -193,17 +193,7 @@ const handleSubmit = async (e) => {
 
       <div className="sm:mx-auto sm:w-full sm:max-w-lg relative z-10">
         {/* Brand Header */}
-        <div className="flex justify-center">
-          <a href="/" className="inline-flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-lg bg-[#2563EB] flex items-center justify-center text-white shadow-sm group-hover:bg-[#1D4ED8] transition-colors">
-              <Cloud className="w-5 h-5 stroke-[2.2]" />
-            </div>
-            <div>
-              <span className="text-lg font-bold text-[#0F172A] tracking-tight">Lumina</span>
-              <span className="text-lg font-medium text-[#2563EB]">Clarity</span>
-            </div>
-          </a>
-        </div>
+
 
         <h2 className="mt-6 text-center text-2xl font-bold tracking-tight text-[#0F172A]">
           Create your account
@@ -213,7 +203,7 @@ const handleSubmit = async (e) => {
         <div className="mt-2.5 flex justify-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ECFDF5] border border-[#A7F3D0] text-xs font-semibold text-[#047857]">
             <HardDrive className="w-3.5 h-3.5" />
-            <span>Default 5.0 GB Cloud Quota Initialized</span>
+            <span>Default 5.0 GB Cloud Storage</span>
           </div>
         </div>
       </div>
@@ -315,7 +305,7 @@ const handleSubmit = async (e) => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#94A3B8] hover:text-[#475569] transition-colors"
+                  className="absolute cursor-pointer inset-y-0 right-0 pr-3 flex items-center text-[#94A3B8] hover:text-[#475569] transition-colors"
                   tabIndex={-1}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -390,7 +380,7 @@ const handleSubmit = async (e) => {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#94A3B8] hover:text-[#475569] transition-colors"
+                  className="absolute cursor-pointer   inset-y-0 right-0 pr-3 flex items-center text-[#94A3B8] hover:text-[#475569] transition-colors"
                   tabIndex={-1}
                 >
                   {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -432,7 +422,7 @@ const handleSubmit = async (e) => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-2.5 px-4 rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-semibold shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed transform active:scale-[0.99]"
+                className="w-full py-2.5 px-4 cursor-pointer rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-semibold shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed transform active:scale-[0.99]"
               >
                 {isSubmitting ? (
                   <>
@@ -454,7 +444,7 @@ const handleSubmit = async (e) => {
           <div className="mt-6 pt-5 border-t border-[#F1F5F9] text-center">
             <p className="text-xs text-[#475569]">
               Already have an account?{' '}
-              <button onClick={() => navigate('/login')} className="font-semibold text-[#2563EB] hover:text-[#1D4ED8]">
+              <button onClick={() => navigate('/login')} className="cursor-pointer font-semibold text-[#2563EB] hover:text-[#1D4ED8]">
                 Sign in
               </button>
             </p>

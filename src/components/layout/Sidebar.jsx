@@ -43,16 +43,16 @@ export function Sidebar({ onOpenNewFolder, onOpenUpload, onCloseMobile }) {
         <Link
           to="/drive"
           onClick={onCloseMobile}
-          className="flex items-center gap-2.5 px-2 py-1 text-on-surface hover:opacity-90 transition-opacity"
+          className="flex items-center gap-2 px-2 py-1 text-on-surface hover:opacity-90 transition-opacity"
         >
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white shadow-sm">
+          <div className="w-8 h-8 rounded-md bg-primary border-none flex items-center justify-center text-white shadow-sm">
             <Cloud size={18} />
           </div>
-          <div>
-            <h1 className="text-sm font-bold tracking-tight text-on-surface flex items-center gap-1.5">
-              Lumina Clarity
+          <div className='flex flex-col align-center justify-center'>
+            <h1 className="text-sm text-primary font-bold tracking-tight flex items-center gap-1">
+              Stream Drive
             </h1>
-            <span className="text-[10px] uppercase font-semibold tracking-wider text-primary">
+            <span className="text-[10px] uppercase font-semibold tracking-wider text-blue-400">
               Cloud Workspace
             </span>
           </div>
@@ -63,7 +63,7 @@ export function Sidebar({ onOpenNewFolder, onOpenUpload, onCloseMobile }) {
           <button
             type="button"
             onClick={() => onOpenUpload && onOpenUpload()}
-            className="w-full h-10 bg-primary hover:bg-primary-hover text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.98]"
+            className="w-full h-10 bg-primary hover:bg-primary-hover cursor-pointer text-white text-xs font-semibold rounded-md flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.98]"
           >
             <Plus size={16} />
             <span>Upload File</span>

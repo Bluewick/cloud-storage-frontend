@@ -121,7 +121,7 @@ export default function Login() {
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         {/* Brand Logo */}
-        <div className="flex justify-center">
+        {/* <div className="flex justify-center">
           <a href="/" className="inline-flex items-center gap-2.5 group">
             <div className="w-10 h-10 rounded-lg bg-[#2563EB] flex items-center justify-center text-white shadow-sm group-hover:bg-[#1D4ED8] transition-colors">
               <Cloud className="w-5 h-5 stroke-[2.2]" />
@@ -131,7 +131,7 @@ export default function Login() {
               <span className="text-lg font-medium text-[#2563EB]">Clarity</span>
             </div>
           </a>
-        </div>
+        </div> */}
 
         <h2 className="mt-6 text-center text-2xl font-bold tracking-tight text-[#0F172A]">
           Sign in to your workspace
@@ -252,7 +252,7 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-2.5 px-4 rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-semibold shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed transform active:scale-[0.99]"
+                className="w-full py-2.5 px-4 cursor-pointer rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-semibold shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed transform active:scale-[0.99]"
               >
                 {isSubmitting ? (
                   <>
@@ -283,7 +283,7 @@ export default function Login() {
             <div className="mt-4 grid grid-cols-2 gap-3">
               <button
                 type="button"
-                className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-[#CBD5E1] rounded-lg text-xs font-medium text-[#0F172A] bg-white hover:bg-[#F8FAFC] transition-colors"
+                className="w-full cursor-pointer flex items-center justify-center gap-2 px-3 py-2 border border-[#CBD5E1] rounded-lg text-xs font-medium text-[#0F172A] bg-white hover:bg-[#F8FAFC] transition-colors"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24">
                   <path
@@ -308,7 +308,7 @@ export default function Login() {
 
               <button
                 type="button"
-                className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-[#CBD5E1] rounded-lg text-xs font-medium text-[#0F172A] bg-white hover:bg-[#F8FAFC] transition-colors"
+                className="w-full cursor-pointer flex items-center justify-center gap-2 px-3 py-2 border border-[#CBD5E1] rounded-lg text-xs font-medium text-[#0F172A] bg-white hover:bg-[#F8FAFC] transition-colors"
               >
                 <ShieldCheck className="w-4 h-4 text-[#2563EB]" />
                 <span>SSO / SAML</span>

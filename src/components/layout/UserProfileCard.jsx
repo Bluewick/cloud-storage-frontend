@@ -50,9 +50,9 @@ export function UserProfileCard() {
               <p className="text-xs font-semibold text-on-surface truncate">{user.fullName}</p>
               <p className="text-[11px] text-on-surface-muted truncate">{user.email}</p>
             </div>
-            <Badge variant="success" size="sm" className="font-semibold">
+            {/* <Badge variant="success" size="sm" className="font-semibold">
               PRO
-            </Badge>
+            </Badge> */}
           </div>
 
           <div className="h-px bg-outline my-1.5" />
@@ -64,7 +64,7 @@ export function UserProfileCard() {
               setIsOpen(false);
               navigate('/settings');
             }}
-            className="w-full flex items-center gap-2.5 px-2.5 py-2 text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-dim rounded-lg transition-colors text-left"
+            className="w-full cursor-pointer flex items-center gap-2.5 px-2.5 py-2 text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-dim rounded-lg transition-colors text-left"
           >
             <Settings size={15} className="text-on-surface-muted" />
             <span>Account Settings</span>
@@ -76,7 +76,7 @@ export function UserProfileCard() {
               setIsOpen(false);
               navigate('/settings');
             }}
-            className="w-full flex items-center gap-2.5 px-2.5 py-2 text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-dim rounded-lg transition-colors text-left"
+            className="w-full cursor-pointer flex items-center gap-2.5 px-2.5 py-2 text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-dim rounded-lg transition-colors text-left"
           >
             <HardDrive size={15} className="text-on-surface-muted" />
             <span>Storage & Plan</span>
@@ -91,7 +91,7 @@ export function UserProfileCard() {
               setIsOpen(false);
               logout();
             }}
-            className="w-full flex items-center gap-2.5 px-2.5 py-2 text-xs font-medium text-accent-error hover:bg-accent-error-container hover:text-accent-error-on rounded-lg transition-colors text-left"
+            className="w-full cursor-pointer flex items-center gap-2.5 px-2.5 py-2 text-xs font-medium text-accent-error hover:bg-accent-error-container hover:text-accent-error-on rounded-lg transition-colors text-left"
           >
             <LogOut size={15} />
             <span>Log out</span>
@@ -103,17 +103,17 @@ export function UserProfileCard() {
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-full flex items-center justify-between p-2 rounded-xl hover:bg-surface-dim border border-transparent hover:border-outline transition-all duration-150 text-left group"
+        className="w-full cursor-pointer flex items-center justify-between p-2 rounded-xl hover:bg-surface-dim border border-transparent hover:border-outline transition-all duration-150 text-left group"
       >
         <div className="flex items-center gap-2.5 truncate">
           {user.avatarUrl ? (
             <img
               src={user.avatarUrl}
               alt={user.fullName}
-              className="w-8 h-8 rounded-lg object-cover border border-outline shrink-0"
+              className="w-8 h-8 rounded-full object-cover border border-outline shrink-0"
             />
           ) : (
-            <div className="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-semibold text-xs shrink-0 shadow-sm">
+            <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-xs shrink-0 shadow-sm">
               {initials}
             </div>
           )}

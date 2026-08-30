@@ -24,7 +24,7 @@ export function DropdownMenu({
   }, [isOpen]);
 
   return (
-    <div className="relative inline-block text-left" ref={containerRef}>
+    <div className="relative cursor-pointer inline-block text-left" ref={containerRef}>
       {/* Trigger */}
       <div 
         onClick={() => setIsOpen((prev) => !prev)} 
@@ -73,7 +73,7 @@ export function DropdownItem({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`w-full flex items-center justify-between px-2.5 py-2 text-xs font-medium rounded-lg transition-colors text-left ${variantClasses} ${
+      className={`w-full flex cursor-pointer items-center justify-between px-2.5 py-2 text-xs font-medium rounded-lg transition-colors text-left ${variantClasses} ${
         disabled ? 'opacity-40 cursor-not-allowed' : ''
       } ${className}`}
     >

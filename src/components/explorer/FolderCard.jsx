@@ -29,7 +29,7 @@ export function FolderCard({
       {/* Folder Icon & Name */}
       <div
         onClick={() => navigate(`/drive/${folder.id}`)}
-        className="flex items-center gap-3 truncate flex-1 pr-2"
+        className="flex cursor-pointer items-center gap-3 truncate flex-1 pr-2"
       >
         <div className="p-2 rounded-lg bg-blue-50/50 group-hover:bg-blue-50 transition-colors shrink-0">
           {getFolderIcon(20, folder.is_starred || folder.isStarred)}
@@ -48,7 +48,7 @@ export function FolderCard({
             e.stopPropagation();
             onStar(folder);
           }}
-          className={`p-1.5 rounded-lg hover:bg-surface-dim transition-colors ${
+          className={`p-1.5 cursor-pointer rounded-lg hover:bg-surface-dim transition-colors ${
             folder.is_starred || folder.isStarred ? 'text-amber-500 opacity-100' : 'text-on-surface-muted'
           }`}
         >
@@ -64,7 +64,7 @@ export function FolderCard({
             trigger={
               <button
                 type="button"
-                className="p-1.5 text-on-surface-muted hover:text-on-surface hover:bg-surface-dim rounded-lg"
+                className="p-1.5 cursor-pointer text-on-surface-muted hover:text-on-surface hover:bg-surface-dim rounded-lg"
               >
                 <MoreVertical size={14} />
               </button>

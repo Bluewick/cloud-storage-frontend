@@ -40,7 +40,7 @@ export const Button = React.forwardRef(function Button(
   ref
 ) {
   const baseClasses =
-    'inline-flex items-center justify-center transition-all duration-150 select-none outline-none focus-visible:ring-2 disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed';
+    'inline-flex items-center cursor-pointer justify-center transition-all duration-150 select-none outline-none focus-visible:ring-2 disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed';
 
   return (
     <button

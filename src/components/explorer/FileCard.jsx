@@ -90,7 +90,7 @@ export function FileCard({
             trigger={
               <button
                 type="button"
-                className="p-1.5 text-on-surface-muted hover:text-on-surface hover:bg-surface-dim rounded-lg"
+                className="p-1.5 cursor-pointer text-on-surface-muted hover:text-on-surface hover:bg-surface-dim rounded-lg"
               >
                 <MoreVertical size={14} />
               </button>

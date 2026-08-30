@@ -88,7 +88,7 @@ export function ExplorerTable({
                 <td className="py-2 px-4 text-right" onClick={(e) => e.stopPropagation()}>
                   <DropdownMenu
                     trigger={
-                      <button className="p-1.5 text-on-surface-muted hover:text-on-surface rounded-lg">
+                      <button className="p-1.5 cursor-pointer text-on-surface-muted hover:text-on-surface rounded-lg">
                         <MoreVertical size={15} />
                       </button>
                     }
@@ -178,7 +178,7 @@ export function ExplorerTable({
                 <td className="py-2 px-4 text-right">
                   <DropdownMenu
                     trigger={
-                      <button className="p-1.5 text-on-surface-muted hover:text-on-surface rounded-lg">
+                      <button className="p-1.5 cursor-pointer text-on-surface-muted hover:text-on-surface rounded-lg">
                         <MoreVertical size={15} />
                       </button>
                     }

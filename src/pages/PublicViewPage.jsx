@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
-import { publicLinksApi } from '../api/publicLinks.api';
-import { getFileIcon, getFolderIcon } from '../utils/fileIcons';
-import { formatBytes, formatDate } from '../utils/formatters';
-import { Button } from '../components/common/Button';
-import { Input } from '../components/common/Input';
-import { Badge } from '../components/common/Badge';
+import React, { useState, useEffect, useMemo } from "react";
+import { useParams } from "react-router-dom";
+import { publicLinksApi } from "../api/publicLinks.api";
+import { getFileIcon, getFolderIcon } from "../utils/fileIcons";
+import { formatBytes, formatDate } from "../utils/formatters";
+import { Button } from "../components/common/Button";
+import { Input } from "../components/common/Input";
+import { Badge } from "../components/common/Badge";
 import {
   Download,
   Lock,
@@ -23,39 +23,41 @@ import {
   FileText,
   Shield,
   Eye,
-} from 'lucide-react';
+} from "lucide-react";
 
 export function PublicViewPage() {
   const { token } = useParams();
   const [resource, setResource] = useState(null);
-  const [resourceType, setResourceType] = useState('resource');
-  const [password, setPassword] = useState('');
+  const [resourceType, setResourceType] = useState("resource");
+  const [password, setPassword] = useState("");
   const [isPasswordRequired, setIsPasswordRequired] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
-  
+  const [error, setError] = useState("");
+
   // Navigation & View State
   const [currentFolderId, setCurrentFolderId] = useState(null);
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'list'
-  const [searchQuery, setSearchQuery] = useState('');
+  const [viewMode, setViewMode] = useState("grid"); // 'grid' | 'list'
+  const [searchQuery, setSearchQuery] = useState("");
   const [downloadingFileId, setDownloadingFileId] = useState(null);
   const [isDownloadingSingleFile, setIsDownloadingSingleFile] = useState(false);
 
-  const fetchResource = async (pwd = '', folderId = null) => {
+  const fetchResource = async (pwd = "", folderId = null) => {
     setIsLoading(true);
-    setError('');
+    setError("");
     try {
       const res = await publicLinksApi.viewPublicResource(token, pwd, folderId);
       if (res?.data) {
         if (res.data.passwordRequired) {
           setIsPasswordRequired(true);
-          setResourceType(res.data.resourceType || 'resource');
+          setResourceType(res.data.resourceType || "resource");
           if (pwd) {
-            setError('Incorrect password. Please try again.');
+            setError("Incorrect password. Please try again.");
           }
         } else {
           setResource(res.data);
-          setResourceType(res.data.resourceType || (res.data.folder ? 'folder' : 'file'));
+          setResourceType(
+            res.data.resourceType || (res.data.folder ? "folder" : "file"),
+          );
           if (res.data.currentFolder) {
             setCurrentFolderId(res.data.currentFolder.id);
           }
@@ -65,19 +67,22 @@ export function PublicViewPage() {
     } catch (err) {
       if (
         err.response?.status === 401 ||
-        err.code === 'PASSWORD_REQUIRED' ||
-        err.response?.data?.error?.code === 'INVALID_LINK_PASSWORD'
+        err.code === "PASSWORD_REQUIRED" ||
+        err.response?.data?.error?.code === "INVALID_LINK_PASSWORD"
       ) {
         setIsPasswordRequired(true);
         if (pwd || err.response?.data?.error?.message) {
-          setError(err.response?.data?.error?.message || 'Incorrect password. Please try again.');
+          setError(
+            err.response?.data?.error?.message ||
+              "Incorrect password. Please try again.",
+          );
         }
       } else {
         const errorMsg =
           err.response?.data?.error?.message ||
           err.response?.data?.message ||
           err.message ||
-          'This share link has expired or is invalid.';
+          "This share link has expired or is invalid.";
         setError(errorMsg);
       }
     } finally {
@@ -95,7 +100,7 @@ export function PublicViewPage() {
   };
 
   const handleNavigateFolder = (folderId) => {
-    setSearchQuery('');
+    setSearchQuery("");
     fetchResource(password, folderId);
   };
 
@@ -108,18 +113,26 @@ export function PublicViewPage() {
     }
 
     try {
-      const res = await publicLinksApi.downloadPublicResource(token, password, fileId);
+      const res = await publicLinksApi.downloadPublicResource(
+        token,
+        password,
+        fileId,
+      );
       if (res?.data?.downloadUrl) {
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = res.data.downloadUrl;
-        link.download = res.data.name || 'download';
-        link.target = '_blank';
+        link.download = res.data.name || "download";
+        link.target = "_blank";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
       }
     } catch (err) {
-      alert(err.response?.data?.error?.message || err.message || 'Failed to generate download link.');
+      alert(
+        err.response?.data?.error?.message ||
+          err.message ||
+          "Failed to generate download link.",
+      );
     } finally {
       if (fileId) {
         setDownloadingFileId(null);
@@ -129,15 +142,17 @@ export function PublicViewPage() {
     }
   };
 
-  const isFolder = resource && (resource.resourceType === 'folder' || resource.folder);
-  const isFile = resource && (resource.resourceType === 'file' || resource.file);
+  const isFolder =
+    resource && (resource.resourceType === "folder" || resource.folder);
+  const isFile =
+    resource && (resource.resourceType === "file" || resource.file);
 
   // Filtered files & folders for search
   const filteredFolders = useMemo(() => {
     if (!resource?.folders) return [];
     if (!searchQuery.trim()) return resource.folders;
     return resource.folders.filter((f) =>
-      f.name.toLowerCase().includes(searchQuery.toLowerCase())
+      f.name.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }, [resource?.folders, searchQuery]);
 
@@ -145,7 +160,7 @@ export function PublicViewPage() {
     if (!resource?.files) return [];
     if (!searchQuery.trim()) return resource.files;
     return resource.files.filter((f) =>
-      f.name.toLowerCase().includes(searchQuery.toLowerCase())
+      f.name.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }, [resource?.files, searchQuery]);
 
@@ -159,7 +174,7 @@ export function PublicViewPage() {
           </div>
           <div>
             <span className="text-sm font-bold tracking-tight text-slate-900 block leading-tight">
-              Stream Drive
+              NeoDrive
             </span>
             <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wider block">
               Public Portal
@@ -168,7 +183,11 @@ export function PublicViewPage() {
         </div>
 
         <div className="flex items-center gap-2">
-          <Badge variant="outline" size="sm" className="hidden sm:inline-flex items-center gap-1.5 py-1 px-2.5 bg-slate-50 border-slate-200 text-slate-600">
+          <Badge
+            variant="outline"
+            size="sm"
+            className="hidden sm:inline-flex items-center gap-1.5 py-1 px-2.5 bg-slate-50 border-slate-200 text-slate-600"
+          >
             <Eye size={12} className="text-blue-500" />
             <span>Public Shared View</span>
           </Badge>
@@ -187,8 +206,12 @@ export function PublicViewPage() {
               <Loader2 className="animate-spin" size={24} />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-slate-800">Accessing Resource</h4>
-              <p className="text-xs text-slate-400 mt-0.5">Fetching verified storage metadata...</p>
+              <h4 className="text-sm font-bold text-slate-800">
+                Accessing Resource
+              </h4>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Fetching verified storage metadata...
+              </p>
             </div>
           </div>
         ) : isPasswordRequired ? (
@@ -197,10 +220,13 @@ export function PublicViewPage() {
             <div className="w-16 h-16 rounded-2xl bg-amber-50 text-amber-600 mx-auto flex items-center justify-center border border-amber-200 shadow-sm mb-5">
               <Lock size={28} />
             </div>
-            
-            <h3 className="text-lg font-bold text-slate-900">Protected Share Link</h3>
+
+            <h3 className="text-lg font-bold text-slate-900">
+              Protected Share Link
+            </h3>
             <p className="text-xs text-slate-500 mt-1 max-w-xs mx-auto">
-              This {resourceType === 'folder' ? 'folder' : 'file'} is protected with an end-to-end access password.
+              This {resourceType === "folder" ? "folder" : "file"} is protected
+              with an end-to-end access password.
             </p>
 
             <form onSubmit={handlePasswordSubmit} className="space-y-4 mt-6">
@@ -211,7 +237,7 @@ export function PublicViewPage() {
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
-                    if (error) setError('');
+                    if (error) setError("");
                   }}
                   error={error}
                   autoFocus
@@ -235,7 +261,9 @@ export function PublicViewPage() {
             {resource.file.thumbnailUrl || resource.file.thumbnail_url ? (
               <div className="w-full max-h-56 rounded-2xl overflow-hidden bg-slate-50 border border-slate-200/80 shadow-inner flex items-center justify-center">
                 <img
-                  src={resource.file.thumbnailUrl || resource.file.thumbnail_url}
+                  src={
+                    resource.file.thumbnailUrl || resource.file.thumbnail_url
+                  }
                   alt={resource.file.name}
                   className="w-full h-full object-contain max-h-56"
                   loading="lazy"
@@ -243,7 +271,11 @@ export function PublicViewPage() {
               </div>
             ) : (
               <div className="w-24 h-24 rounded-3xl bg-slate-50 border border-slate-200/80 mx-auto flex items-center justify-center shadow-inner">
-                {getFileIcon(resource.file.extension, resource.file.mimeType, 48)}
+                {getFileIcon(
+                  resource.file.extension,
+                  resource.file.mimeType,
+                  48,
+                )}
               </div>
             )}
 
@@ -255,8 +287,12 @@ export function PublicViewPage() {
                 <Badge variant="default" size="sm">
                   {formatBytes(resource.file.sizeBytes)}
                 </Badge>
-                <Badge variant="outline" size="sm" className="uppercase font-mono">
-                  {resource.file.extension || 'FILE'}
+                <Badge
+                  variant="outline"
+                  size="sm"
+                  className="uppercase font-mono"
+                >
+                  {resource.file.extension || "FILE"}
                 </Badge>
               </div>
             </div>
@@ -264,11 +300,15 @@ export function PublicViewPage() {
             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 text-xs text-slate-600 space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-slate-400">Created:</span>
-                <span className="font-semibold text-slate-700">{formatDate(resource.file.createdAt)}</span>
+                <span className="font-semibold text-slate-700">
+                  {formatDate(resource.file.createdAt)}
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-slate-400">Access Mode:</span>
-                <span className="font-semibold text-slate-700 capitalize">{resource.permission || 'Viewer'}</span>
+                <span className="font-semibold text-slate-700 capitalize">
+                  {resource.permission || "Viewer"}
+                </span>
               </div>
             </div>
 
@@ -295,10 +335,13 @@ export function PublicViewPage() {
                   </div>
                   <div>
                     <h2 className="text-lg font-bold text-slate-900 leading-tight">
-                      {resource.currentFolder?.name || resource.folder?.name || 'Shared Folder'}
+                      {resource.currentFolder?.name ||
+                        resource.folder?.name ||
+                        "Shared Folder"}
                     </h2>
                     <p className="text-xs text-slate-400 mt-0.5">
-                      {(filteredFolders.length + filteredFiles.length)} items in this directory
+                      {filteredFolders.length + filteredFiles.length} items in
+                      this directory
                     </p>
                   </div>
                 </div>
@@ -307,7 +350,10 @@ export function PublicViewPage() {
                 <div className="flex items-center gap-2 self-end sm:self-center">
                   {/* Search bar */}
                   <div className="relative w-44 sm:w-56">
-                    <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <Search
+                      size={14}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                    />
                     <input
                       type="text"
                       placeholder="Filter items..."
@@ -321,9 +367,11 @@ export function PublicViewPage() {
                   <div className="flex items-center p-0.5 bg-slate-100 border border-slate-200 rounded-xl">
                     <button
                       type="button"
-                      onClick={() => setViewMode('grid')}
+                      onClick={() => setViewMode("grid")}
                       className={`p-1.5 rounded-lg text-slate-600 transition-colors ${
-                        viewMode === 'grid' ? 'bg-white text-primary shadow-sm' : 'hover:text-slate-900'
+                        viewMode === "grid"
+                          ? "bg-white text-primary shadow-sm"
+                          : "hover:text-slate-900"
                       }`}
                       title="Grid View"
                     >
@@ -331,9 +379,11 @@ export function PublicViewPage() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => setViewMode('list')}
+                      onClick={() => setViewMode("list")}
                       className={`p-1.5 rounded-lg text-slate-600 transition-colors ${
-                        viewMode === 'list' ? 'bg-white text-primary shadow-sm' : 'hover:text-slate-900'
+                        viewMode === "list"
+                          ? "bg-white text-primary shadow-sm"
+                          : "hover:text-slate-900"
                       }`}
                       title="List View"
                     >
@@ -350,18 +400,28 @@ export function PublicViewPage() {
                     const isLast = idx === resource.breadcrumbs.length - 1;
                     return (
                       <React.Fragment key={crumb.id}>
-                        {idx > 0 && <ChevronRight size={13} className="text-slate-300 shrink-0" />}
+                        {idx > 0 && (
+                          <ChevronRight
+                            size={13}
+                            className="text-slate-300 shrink-0"
+                          />
+                        )}
                         <button
                           type="button"
                           onClick={() => handleNavigateFolder(crumb.id)}
                           disabled={isLast}
                           className={`px-2 py-1 rounded-lg transition-colors flex items-center gap-1.5 font-medium ${
                             isLast
-                              ? 'bg-blue-50/70 text-primary font-semibold cursor-default'
-                              : 'text-slate-600 hover:text-primary hover:bg-slate-100'
+                              ? "bg-blue-50/70 text-primary font-semibold cursor-default"
+                              : "text-slate-600 hover:text-primary hover:bg-slate-100"
                           }`}
                         >
-                          <Folder size={13} className={isLast ? 'text-primary' : 'text-slate-400'} />
+                          <Folder
+                            size={13}
+                            className={
+                              isLast ? "text-primary" : "text-slate-400"
+                            }
+                          />
                           <span>{crumb.name}</span>
                         </button>
                       </React.Fragment>
@@ -379,15 +439,15 @@ export function PublicViewPage() {
                     <FolderOpen size={28} />
                   </div>
                   <h4 className="text-sm font-semibold text-slate-700 mt-2">
-                    {searchQuery ? 'No matching items' : 'This folder is empty'}
+                    {searchQuery ? "No matching items" : "This folder is empty"}
                   </h4>
                   <p className="text-xs text-slate-400 max-w-xs">
                     {searchQuery
                       ? `No files or folders matching "${searchQuery}" found in this directory.`
-                      : 'There are no files or subfolders uploaded to this directory yet.'}
+                      : "There are no files or subfolders uploaded to this directory yet."}
                   </p>
                 </div>
-              ) : viewMode === 'grid' ? (
+              ) : viewMode === "grid" ? (
                 /* GRID VIEW */
                 <div className="space-y-6">
                   {/* Subfolders Grid */}
@@ -411,7 +471,10 @@ export function PublicViewPage() {
                                 {f.name}
                               </span>
                             </div>
-                            <ChevronRight size={14} className="text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+                            <ChevronRight
+                              size={14}
+                              className="text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all"
+                            />
                           </div>
                         ))}
                       </div>
@@ -441,14 +504,21 @@ export function PublicViewPage() {
                                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                       loading="lazy"
                                       onError={(e) => {
-                                        e.currentTarget.style.display = 'none';
-                                        if (e.currentTarget.nextElementSibling) {
-                                          e.currentTarget.nextElementSibling.style.display = 'flex';
+                                        e.currentTarget.style.display = "none";
+                                        if (
+                                          e.currentTarget.nextElementSibling
+                                        ) {
+                                          e.currentTarget.nextElementSibling.style.display =
+                                            "flex";
                                         }
                                       }}
                                     />
                                     <div className="hidden w-full h-full items-center justify-center bg-slate-50">
-                                      {getFileIcon(fi.extension, fi.mimeType, 24)}
+                                      {getFileIcon(
+                                        fi.extension,
+                                        fi.mimeType,
+                                        24,
+                                      )}
                                     </div>
                                   </div>
                                 ) : (
@@ -463,13 +533,16 @@ export function PublicViewPage() {
                                   disabled={downloadingFileId === fi.id}
                                   className={`p-2 rounded-xl text-slate-400 hover:text-primary hover:bg-blue-50 border border-transparent hover:border-blue-100 transition-colors ${
                                     thumbUrl
-                                      ? 'absolute top-1.5 right-1.5 bg-white/90 backdrop-blur-sm shadow-sm'
-                                      : 'absolute top-0 right-0'
+                                      ? "absolute top-1.5 right-1.5 bg-white/90 backdrop-blur-sm shadow-sm"
+                                      : "absolute top-0 right-0"
                                   }`}
                                   title="Download File"
                                 >
                                   {downloadingFileId === fi.id ? (
-                                    <Loader2 size={15} className="animate-spin text-primary" />
+                                    <Loader2
+                                      size={15}
+                                      className="animate-spin text-primary"
+                                    />
                                   ) : (
                                     <Download size={15} />
                                   )}
@@ -523,16 +596,24 @@ export function PublicViewPage() {
                             </div>
                           </td>
                           <td className="py-2 px-4 text-slate-400">—</td>
-                          <td className="py-2 px-4 text-slate-400">{formatDate(f.createdAt)}</td>
+                          <td className="py-2 px-4 text-slate-400">
+                            {formatDate(f.createdAt)}
+                          </td>
                           <td className="py-2 px-4 text-right">
-                            <ChevronRight size={15} className="text-slate-300 group-hover:text-primary ml-auto" />
+                            <ChevronRight
+                              size={15}
+                              className="text-slate-300 group-hover:text-primary ml-auto"
+                            />
                           </td>
                         </tr>
                       ))}
 
                       {/* Files Rows */}
                       {filteredFiles.map((fi) => (
-                        <tr key={fi.id} className="h-12 hover:bg-slate-50/80 transition-colors group">
+                        <tr
+                          key={fi.id}
+                          className="h-12 hover:bg-slate-50/80 transition-colors group"
+                        >
                           <td className="py-2 px-4 font-medium text-slate-800">
                             <div className="flex items-center gap-2.5 truncate">
                               {fi.thumbnailUrl || fi.thumbnail_url ? (
@@ -543,9 +624,10 @@ export function PublicViewPage() {
                                     className="w-full h-full object-cover"
                                     loading="lazy"
                                     onError={(e) => {
-                                      e.currentTarget.style.display = 'none';
+                                      e.currentTarget.style.display = "none";
                                       if (e.currentTarget.nextElementSibling) {
-                                        e.currentTarget.nextElementSibling.style.display = 'flex';
+                                        e.currentTarget.nextElementSibling.style.display =
+                                          "flex";
                                       }
                                     }}
                                   />
@@ -564,7 +646,9 @@ export function PublicViewPage() {
                           <td className="py-2 px-4 text-slate-500 font-mono text-[11px]">
                             {formatBytes(fi.sizeBytes)}
                           </td>
-                          <td className="py-2 px-4 text-slate-400">{formatDate(fi.createdAt)}</td>
+                          <td className="py-2 px-4 text-slate-400">
+                            {formatDate(fi.createdAt)}
+                          </td>
                           <td className="py-2 px-4 text-right">
                             <button
                               type="button"
@@ -574,7 +658,10 @@ export function PublicViewPage() {
                               title="Download"
                             >
                               {downloadingFileId === fi.id ? (
-                                <Loader2 size={14} className="animate-spin text-primary" />
+                                <Loader2
+                                  size={14}
+                                  className="animate-spin text-primary"
+                                />
                               ) : (
                                 <Download size={14} />
                               )}
@@ -595,9 +682,12 @@ export function PublicViewPage() {
               <AlertCircle size={28} />
             </div>
             <div>
-              <h3 className="text-base font-bold text-slate-900">Resource Unavailable</h3>
+              <h3 className="text-base font-bold text-slate-900">
+                Resource Unavailable
+              </h3>
               <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-                {error || 'This link has expired or has been revoked by the owner.'}
+                {error ||
+                  "This link has expired or has been revoked by the owner."}
               </p>
             </div>
           </div>
@@ -607,7 +697,7 @@ export function PublicViewPage() {
       {/* Footer Strip */}
       <footer className="w-full py-4 text-center text-xs text-slate-400 flex items-center justify-center gap-1.5">
         <ShieldCheck size={14} className="text-emerald-500" />
-        <span>Powered by Stream Drive</span>
+        <span>Powered by NeoDrive</span>
       </footer>
     </div>
   );

@@ -1,9 +1,9 @@
-import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { formatBytes } from '../../utils/formatters';
-import { ProgressBar } from '../common/ProgressBar';
-import { UserProfileCard } from './UserProfileCard';
+import React from "react";
+import { NavLink, Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { formatBytes } from "../../utils/formatters";
+import { ProgressBar } from "../common/ProgressBar";
+import { UserProfileCard } from "./UserProfileCard";
 import {
   Cloud,
   HardDrive,
@@ -14,18 +14,18 @@ import {
   Settings,
   Plus,
   Zap,
-} from 'lucide-react';
+} from "lucide-react";
 
 const mainNavigation = [
-  { name: 'My Drive', path: '/drive', icon: HardDrive },
-  { name: 'Shared with me', path: '/shared-with-me', icon: Users },
-  { name: 'Recent', path: '/recents', icon: Clock },
-  { name: 'Starred', path: '/starred', icon: Star },
+  { name: "My Drive", path: "/drive", icon: HardDrive },
+  { name: "Shared with me", path: "/shared-with-me", icon: Users },
+  { name: "Recent", path: "/recents", icon: Clock },
+  { name: "Starred", path: "/starred", icon: Star },
 ];
 
 const systemNavigation = [
-  { name: 'Trash', path: '/trash', icon: Trash2 },
-  { name: 'Settings', path: '/settings', icon: Settings },
+  { name: "Trash", path: "/trash", icon: Trash2 },
+  { name: "Settings", path: "/settings", icon: Settings },
 ];
 
 export function Sidebar({ onOpenNewFolder, onOpenUpload, onCloseMobile }) {
@@ -48,9 +48,9 @@ export function Sidebar({ onOpenNewFolder, onOpenUpload, onCloseMobile }) {
           <div className="w-8 h-8 rounded-md bg-primary border-none flex items-center justify-center text-white shadow-sm">
             <Cloud size={18} />
           </div>
-          <div className='flex flex-col align-center justify-center'>
+          <div className="flex flex-col align-center justify-center">
             <h1 className="text-sm text-primary font-bold tracking-tight flex items-center gap-1">
-              Stream Drive
+              NeoDrive
             </h1>
             <span className="text-[10px] uppercase font-semibold tracking-wider text-blue-400">
               Cloud Workspace
@@ -85,8 +85,8 @@ export function Sidebar({ onOpenNewFolder, onOpenUpload, onCloseMobile }) {
                 className={({ isActive }) =>
                   `h-9 px-3 rounded-lg flex items-center gap-3 text-xs font-medium transition-all ${
                     isActive
-                      ? 'bg-primary-container text-primary font-semibold'
-                      : 'text-on-surface-variant hover:bg-surface-dim hover:text-on-surface'
+                      ? "bg-primary-container text-primary font-semibold"
+                      : "text-on-surface-variant hover:bg-surface-dim hover:text-on-surface"
                   }`
                 }
               >
@@ -112,8 +112,8 @@ export function Sidebar({ onOpenNewFolder, onOpenUpload, onCloseMobile }) {
                 className={({ isActive }) =>
                   `h-9 px-3 rounded-lg flex items-center gap-3 text-xs font-medium transition-all ${
                     isActive
-                      ? 'bg-primary-container text-primary font-semibold'
-                      : 'text-on-surface-variant hover:bg-surface-dim hover:text-on-surface'
+                      ? "bg-primary-container text-primary font-semibold"
+                      : "text-on-surface-variant hover:bg-surface-dim hover:text-on-surface"
                   }`
                 }
               >
@@ -139,7 +139,12 @@ export function Sidebar({ onOpenNewFolder, onOpenUpload, onCloseMobile }) {
             </span>
           </div>
 
-          <ProgressBar value={usedBytes} max={limitBytes} size="sm" color="auto" />
+          <ProgressBar
+            value={usedBytes}
+            max={limitBytes}
+            size="sm"
+            color="auto"
+          />
 
           <p className="text-[11px] text-on-surface-variant">
             {formatBytes(usedBytes)} of {formatBytes(limitBytes)} used

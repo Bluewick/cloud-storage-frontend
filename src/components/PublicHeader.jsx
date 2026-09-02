@@ -19,7 +19,7 @@ export default function PublicHeader() {
                 <Cloud className="w-5 h-5 stroke-[2.2]" />
               </div>
               <div>
-                <span className="text-base font-bold text-[#0F172A] tracking-tight">Stream</span>
+                <span className="text-base font-bold text-[#0F172A] tracking-tight">Neo</span>
                 <span className="text-base font-medium text-[#2563EB]">Drive</span>
               </div>
             </a>

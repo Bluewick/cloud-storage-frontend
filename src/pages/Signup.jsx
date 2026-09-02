@@ -70,10 +70,13 @@ export default function Signup() {
   const validateField = (name, value) => {
     let error = '';
     if (name === 'fullName') {
+      const nameRegex = /^[a-zA-Z\s.'-]+$/;
       if (!value.trim()) {
         error = 'Full name is required';
       } else if (value.trim().length < 2) {
         error = 'Name must be at least 2 characters';
+      } else if (!nameRegex.test(value.trim())) {
+        error = 'Invalid characters in name';
       }
     }
     if (name === 'email') {

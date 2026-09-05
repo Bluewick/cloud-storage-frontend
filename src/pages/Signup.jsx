@@ -17,6 +17,7 @@ import {
 import { useAuth } from '../context/AuthContext';
 import PublicHeader from '../components/PublicHeader';
 import { useNavigate } from 'react-router-dom';
+import { authApi } from '../api/auth.api';
 
 export default function Signup() {
 

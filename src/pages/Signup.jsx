@@ -22,7 +22,7 @@ import { authApi } from '../api/auth.api';
 export default function Signup() {
 
   const navigate = useNavigate();
-  const { register } = useAuth();
+  const { register, login } = useAuth();
 
   const [formData, setFormData] = useState({
     fullName: '',
